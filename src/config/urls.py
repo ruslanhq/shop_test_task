@@ -25,6 +25,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("src.apps.product.api.v1.urls")),
     path('', include("src.apps.order.api.v1.urls")),
+    path('', include("src.apps.payment.api.v1.urls")),
+
 ] + swagger_urls
 
 if settings.DEBUG:

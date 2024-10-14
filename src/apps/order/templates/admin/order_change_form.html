@@ -1,0 +1,12 @@
+{% extends "admin/change_form.html" %}
+{% load static %}
+
+{% block object-tools %}
+    {% if show_confirm_button %}
+        <form action="{% url 'admin:confirm_order' object_id %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <input type="submit" value="Подтвердить заказ" class="button" />
+        </form>
+    {% endif %}
+    {{ block.super }}
+{% endblock %}

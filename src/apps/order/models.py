@@ -7,7 +7,7 @@ from src.apps.product.models import Product
 
 
 class OrderStatus(models.TextChoices):
-    PENDING = 'в ожидании', 'В ожидании'
+    PENDING = 'Ожидает', 'ожидает'
     CONFIRMED = 'подтвержден', 'Подтвержден'
     CANCELED = 'отменен', 'Отменен'
 
