@@ -11,6 +11,9 @@ class ProductAdmin(admin.ModelAdmin):
         'cost',
         'get_image',
     )
+    readonly_fields = (
+        'id',
+    )
 
     def get_image(self, object):
         if object.picture:

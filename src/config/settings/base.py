@@ -19,6 +19,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 DOWNLOADED = [
     "rest_framework",
+    "drf_yasg",
 ]
 
 PROJECT_APPS = [
