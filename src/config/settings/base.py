@@ -152,7 +152,7 @@ LOGGING = {
         "log_file": {
             "level": "DEBUG",
             "class": "logging.handlers.RotatingFileHandler",
-            "filename": "logs/api.log",
+            "filename": "api.log",
             "maxBytes": 1024 * 1024 * 5,
             "backupCount": 5,
             "formatter": "verbose",
@@ -160,7 +160,7 @@ LOGGING = {
         "error_file": {
             "level": "ERROR",
             "class": "logging.handlers.RotatingFileHandler",
-            "filename": "logs/api_error.log",
+            "filename": "api_error.log",
             "maxBytes": 1024 * 1024 * 5,
             "backupCount": 5,
             "formatter": "verbose",
