@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  web:
+    environment:
+      - DJANGO_SETTINGS_MODULE=src.config.settings.local
+    build: .
+    entrypoint: /app/entrypoint.sh
+    volumes:
+      - .:/app
+      - static_volume:/app/static
+    expose:
+      - "8000"
+    env_file:
+      - .env.local
+    depends_on:
+      - redis
+    networks:
+      - webnet
+
+  celery:
+    build: .
+    command: celery -A src.config.celery worker -l info
+    volumes:
+      - .:/app
+    env_file:
+      - .env.local
+    depends_on:
+      - redis
+      - web
+    networks:
+      - webnet
+
+  redis:
+    image: redis:6
+    ports:
+      - "6379:6379"
+    networks:
+      - webnet
+
+  nginx:
+    image: nginx:1.19-alpine
+    ports:
+      - "80:80"
+    volumes:
+      - static_volume:/app/static
+      - ./media:/app/media
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - web
+    networks:
+      - webnet
+
+  flower:
+    image: mher/flower:latest
+    command: celery -A celery flower --port=5555 --broker=redis://redis:6379/0
+    ports:
+      - "5555:5555"
+    depends_on:
+      - redis
+    networks:
+      - webnet
+    env_file:
+      - .env.local
+
+volumes:
+  static_volume:
+
+networks:
+  webnet:

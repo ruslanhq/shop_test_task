@@ -2,7 +2,7 @@ import os
 
 from dotenv import load_dotenv
 
-from src.config.settings.base import *
+from src.config.settings.base import *  # noqa
 
 load_dotenv(".env.local")
 
@@ -23,3 +23,5 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+CELERY_BROKER_URL = os.environ.get("CELERY_BROKER_URL")

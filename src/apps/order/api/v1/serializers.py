@@ -13,10 +13,19 @@ class OrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ['id', 'products', 'total', 'status', 'created_at', 'confirmation_time']
-        read_only_fields = ['id', 'total', 'status', 'created_at', 'confirmation_time']
+        fields = [
+            "id",
+            "products",
+            "total",
+            "status",
+            "created_at",
+            "confirmation_time",
+        ]
+        read_only_fields = ["id", "total", "status", "created_at", "confirmation_time"]
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-        representation['products'] = ProductSerializer(instance.products.all(), many=True).data
+        representation["products"] = ProductSerializer(
+            instance.products.all(), many=True
+        ).data
         return representation

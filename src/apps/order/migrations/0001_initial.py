@@ -10,19 +10,61 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('product', '0002_alter_product_picture'),
+        ("product", "0002_alter_product_picture"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Order',
+            name="Order",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('total', models.DecimalField(decimal_places=2, max_digits=10, verbose_name='Итоговая сумма')),
-                ('status', models.CharField(choices=[('в ожидании', 'В ожидании'), ('подтвержден', 'Подтвержден'), ('отменен', 'Отменен')], default='в ожидании', max_length=12, verbose_name='Статус')),
-                ('created_at', models.DateTimeField(default=django.utils.timezone.now, verbose_name='Время создания')),
-                ('confirmation_time', models.DateTimeField(blank=True, null=True, verbose_name='Время подтверждения')),
-                ('products', models.ManyToManyField(related_name='orders', to='product.product', verbose_name='Продукты')),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "total",
+                    models.DecimalField(
+                        decimal_places=2, max_digits=10, verbose_name="Итоговая сумма"
+                    ),
+                ),
+                (
+                    "status",
+                    models.CharField(
+                        choices=[
+                            ("в ожидании", "В ожидании"),
+                            ("подтвержден", "Подтвержден"),
+                            ("отменен", "Отменен"),
+                        ],
+                        default="в ожидании",
+                        max_length=12,
+                        verbose_name="Статус",
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(
+                        default=django.utils.timezone.now, verbose_name="Время создания"
+                    ),
+                ),
+                (
+                    "confirmation_time",
+                    models.DateTimeField(
+                        blank=True, null=True, verbose_name="Время подтверждения"
+                    ),
+                ),
+                (
+                    "products",
+                    models.ManyToManyField(
+                        related_name="orders",
+                        to="product.product",
+                        verbose_name="Продукты",
+                    ),
+                ),
             ],
         ),
     ]

@@ -11,13 +11,13 @@ class OrderCreateView(generics.GenericAPIView):
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        products = serializer.validated_data['products']
+        products = serializer.validated_data["products"]
         service = OrderService()
 
         try:
             order = service.create_order(products)
             serializer.instance = order
         except ValueError as e:
-            raise serializer.ValidationError({'detail': str(e)})
+            raise serializer.ValidationError({"detail": str(e)})
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)

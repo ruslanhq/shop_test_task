@@ -14,6 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
@@ -22,11 +23,10 @@ from django.conf import settings
 from src.config.swagger import urlpatterns as swagger_urls
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include("src.apps.product.api.v1.urls")),
-    path('', include("src.apps.order.api.v1.urls")),
-    path('', include("src.apps.payment.api.v1.urls")),
-
+    path("admin/", admin.site.urls),
+    path("", include("src.apps.product.api.v1.urls")),
+    path("", include("src.apps.order.api.v1.urls")),
+    path("", include("src.apps.payment.api.v1.urls")),
 ] + swagger_urls
 
 if settings.DEBUG:

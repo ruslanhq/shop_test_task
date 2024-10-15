@@ -10,18 +10,61 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('order', '0001_initial'),
+        ("order", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Payment',
+            name="Payment",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('amount', models.DecimalField(decimal_places=2, max_digits=10, verbose_name='сумма')),
-                ('status', models.CharField(choices=[('Оплачен', 'оплачен'), ('Не оплачен', 'не оплачен'), ('В обработке', 'в обработке')], default='Не оплачен', max_length=12, verbose_name='статус')),
-                ('type_of_payment', models.CharField(choices=[('Безналичные', 'безналичные'), ('Наличные', 'наличные')], max_length=20, verbose_name='тип оплаты')),
-                ('order', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='payment', to='order.order', verbose_name='заказ')),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "amount",
+                    models.DecimalField(
+                        decimal_places=2, max_digits=10, verbose_name="сумма"
+                    ),
+                ),
+                (
+                    "status",
+                    models.CharField(
+                        choices=[
+                            ("Оплачен", "оплачен"),
+                            ("Не оплачен", "не оплачен"),
+                            ("В обработке", "в обработке"),
+                        ],
+                        default="Не оплачен",
+                        max_length=12,
+                        verbose_name="статус",
+                    ),
+                ),
+                (
+                    "type_of_payment",
+                    models.CharField(
+                        choices=[
+                            ("Безналичные", "безналичные"),
+                            ("Наличные", "наличные"),
+                        ],
+                        max_length=20,
+                        verbose_name="тип оплаты",
+                    ),
+                ),
+                (
+                    "order",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="payment",
+                        to="order.order",
+                        verbose_name="заказ",
+                    ),
+                ),
             ],
         ),
     ]
