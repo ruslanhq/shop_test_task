@@ -5,7 +5,7 @@ services:
     environment:
       - DJANGO_SETTINGS_MODULE=src.config.settings.local
     build: .
-    entrypoint: /app/entrypoint.sh
+    entrypoint: ./entrypoint.sh
     volumes:
       - .:/app
       - static_volume:/app/static
