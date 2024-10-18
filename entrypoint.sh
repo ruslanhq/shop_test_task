@@ -3,7 +3,7 @@
 echo "Performing database migrations..."
 python3 manage.py migrate
 
-if [ -z "$(echo "from django.contrib.auth.models import User; print(User.objects.filter(is_superuser=True).exists())" | python manage.py shell)" ]; then
+if ["$(python manage.py shell -c "from django.contrib.auth import get_user_model; print(get_user_model().objects.filter(is_superuser=True).exists())")" = "False"]; then
     echo "Creating superuser..."
     echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@example.com', 'admin')" | python manage.py shell
 else
